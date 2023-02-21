@@ -8,7 +8,7 @@
     },
     "dockerComposeFile": "./docker-compose.yaml",
     "service": "devcontainer",
-    "workspaceFolder": "/workspaces/CFn",
+    "workspaceFolder": "/workspaces",
     "customizations": {
       "vscode": {
         "extensions": [
