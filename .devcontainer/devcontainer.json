@@ -18,7 +18,8 @@
 			"GitHub.vscode-pull-request-github",
 			"aws-scripting-guy.cform",
 			"oderwat.indent-rainbow",
-			"SirTori.indenticator"
+			"SirTori.indenticator",
+			"ms-vscode.makefile-tools"
 		]
       }
     },
