@@ -1,10 +1,14 @@
 {
-    "name": "node & PostgreSQL",
+    "name": "",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
     //"image": "mcr.microsoft.com/devcontainers/go:0-1-bullseye",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "args": { "VARIANT": "bullseye" }
+    },
     "dockerComposeFile": "./docker-compose.yaml",
     "service": "devcontainer",
-    "workspaceFolder": "/workspaces/webpack",
+    "workspaceFolder": "/workspaces/CFn",
     "customizations": {
       "vscode": {
         "extensions": [
@@ -25,7 +29,7 @@
     },
   
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [5432]
+    "forwardPorts": [5432],
   
     // Use 'postCreateCommand' to run commands after the container is created.
     //"postCreateCommand": "gcloud auth login --cred-file gcp_credentials.json"
@@ -34,6 +38,6 @@
     // "customizations": {},
   
     // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-    // "remoteUser": "root"
+    "remoteUser": "vscode"
   }
   
