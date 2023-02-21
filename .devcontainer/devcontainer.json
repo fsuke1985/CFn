@@ -8,11 +8,14 @@
     "customizations": {
       "vscode": {
         "extensions": [
-          "mhutchie.git-graph",
-          "donjayamanne.githistory",
-          "waderyan.gitblame",
-          "GitHub.vscode-pull-request-github"
-        ]
+			"mhutchie.git-graph",
+			"donjayamanne.githistory",
+			"waderyan.gitblame",
+			"GitHub.vscode-pull-request-github",
+			"aws-scripting-guy.cform",
+			"oderwat.indent-rainbow",
+			"SirTori.indenticator"
+		]
       }
     },
   
