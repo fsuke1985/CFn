@@ -1,6 +1,7 @@
 SHELL = /bin/sh
 .SUFFIXES: .yaml .yml
 
+
 .PHONY:version
 version:
 	@aws --version
