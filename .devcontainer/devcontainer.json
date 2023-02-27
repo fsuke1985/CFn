@@ -8,7 +8,7 @@
     },
     "dockerComposeFile": "./docker-compose.yaml",
     "service": "devcontainer",
-    "workspaceFolder": "/workspace",
+    "workspaceFolder": "/vscode",
     "customizations": {
       "vscode": {
         "extensions": [
