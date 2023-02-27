@@ -1,11 +1,19 @@
 SHELL = /bin/sh
 .SUFFIXES: .yaml .yml
+TARGET := $(wildcard Network/*.yaml)
 
 
-.PHONY:version
+.PHONY: version all update
 version:
 	@aws --version
 
-.PHONY: all
 all:
-	@env
+	@echo $(TARGET)
+
+update:
+	touch $(TARGET)
+
+validate-template: $(TARGET)
+	for files in $(TARGET); do \
+		aws cloudformation validate-template --template-body file://$$files; \
+	done

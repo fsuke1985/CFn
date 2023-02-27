@@ -1,13 +1,31 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: create to AZ
 Metadata: 
+  AWS::CloudFormation::Interface: 
+    ParameterGroups: 
+      - 
+        Label: 
+          default: "Network Configuration"
+        Parameters: 
+          - VPCID
+          - SubnetId
+          - SecurityGroupID
+    ParameterLabels: 
+      VPCID: 
+        default: "Which VPC should this be deployed to?"
 
 Parameters: 
+  SubnetPrivateCidrBlock:
+    Type: String
+    Default: ''
+#Mappings: 
 
-Mappings: 
-
-Conditions: 
+#Conditions: 
 
 Resources: 
-
-Outputs:
+  # Subnet
+  SubnetPublic:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref SubnetPrivateCidrBlock
+#Outputs:
