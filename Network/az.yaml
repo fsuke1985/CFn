@@ -18,14 +18,26 @@ Parameters:
   SubnetPrivateCidrBlock:
     Type: String
     Default: ''
+  VpcCidr:
+    Type: String
+    Default: ''
 #Mappings: 
 
 #Conditions: 
 
 Resources: 
+  # Create to VPC
+  VPC:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      Tags:
+        - Key: Name
+          Value: "test vpc"
   # Subnet
   SubnetPublic:
     Type: AWS::EC2::Subnet
     Properties:
       CidrBlock: !Ref SubnetPrivateCidrBlock
+      VpcId: !Ref VPC
 #Outputs:
