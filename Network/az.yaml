@@ -15,6 +15,9 @@ Metadata:
         default: "Which VPC should this be deployed to?"
 
 Parameters: 
+  SubnetPublicCidrBlock:
+    Type: String
+    Default: ''
   SubnetPrivateCidrBlock:
     Type: String
     Default: ''
@@ -28,16 +31,43 @@ Parameters:
 Resources: 
   # Create to VPC
   VPC:
-    Type: "AWS::EC2::VPC"
+    Type: AWS::EC2::VPC
     Properties:
       CidrBlock: !Ref VpcCidr
       Tags:
         - Key: Name
           Value: "test vpc"
-  # Subnet
+  # Subnet public
   SubnetPublic:
     Type: AWS::EC2::Subnet
     Properties:
-      CidrBlock: !Ref SubnetPrivateCidrBlock
+      CidrBlock: !Ref SubnetPublicCidrBlock
+      AvailabilityZone: "ap-northeast-1d"
       VpcId: !Ref VPC
+      Tags:
+        - Key: "Name"
+          Value: "Subnet"
+  # Subnet private
+  SubnetPrivate:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref SubnetPrivateCidrBlock
+      AvailabilityZone: "ap-northeast-1a"
+      VpcId: !Ref VPC
+  
+
+  # Route Table
+  RootTablePublic:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: "production"
+
+  RouteTablePublicAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties: 
+      RouteTableId: !Ref RootTablePublic
+      SubnetId: !Ref SubnetPublic
 #Outputs:
