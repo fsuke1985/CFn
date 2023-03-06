@@ -1,18 +1,20 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: create to AZ
-Metadata: 
-  AWS::CloudFormation::Interface: 
+Metadata:
+  AWS::CloudFormation::Interface:
     ParameterGroups: 
-      - 
-        Label: 
-          default: "Network Configuration"
+      - Label: 
+          default: 'AvailabilityZone Configuration'
         Parameters: 
-          - VPCID
-          - SubnetId
-          - SecurityGroupID
-    ParameterLabels: 
-      VPCID: 
-        default: "Which VPC should this be deployed to?"
+          - SubnetPublicCidrBlock
+          - SubnetPrivateCidrBlock
+          - VPCId
+      # - Label: 
+      #     default: 'Tag Configuration'
+      #   Parameters:
+      #     - LogicalNamePrefix
+      #     - TagKey
+      #     - TagValue
 
 Parameters: 
   SubnetPublicCidrBlock:
@@ -45,8 +47,8 @@ Resources:
       AvailabilityZone: "ap-northeast-1d"
       VpcId: !Ref VPC
       Tags:
-        - Key: "Name"
-          Value: "Subnet"
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-subnet_public
   # Subnet private
   SubnetPrivate:
     Type: AWS::EC2::Subnet
@@ -54,6 +56,9 @@ Resources:
       CidrBlock: !Ref SubnetPrivateCidrBlock
       AvailabilityZone: "ap-northeast-1a"
       VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-subnet_private
 
   
   
@@ -83,6 +88,7 @@ Resources:
     Properties: 
       RouteTableId: !Ref PublicSubnetRouteTable
       SubnetId: !Ref SubnetPublic
+      
   
   
   # Private_1
