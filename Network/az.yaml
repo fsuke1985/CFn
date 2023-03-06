@@ -38,7 +38,7 @@ Resources:
       CidrBlock: !Ref VpcCidr
       Tags:
         - Key: Name
-          Value: "test vpc"
+          Value: !Sub ${AWS::StackName}-vpc
   # Subnet public
   SubnetPublic:
     Type: AWS::EC2::Subnet
@@ -147,4 +147,21 @@ Resources:
       DestinationCidrBlock: 0.0.0.0/0
       NatGatewayId: !Ref NATGateway
 
-#Outputs:
+Outputs:
+  VpcId:
+    Description: VPC ID 
+    Value: !Ref VPC
+    Export:
+      Name: !Sub  ${AWS::StackName}-VpcId
+  
+  PublicSubnet:
+    Description: The ID of the public subnet
+    Value: !Ref SubnetPublic
+    Export:
+      Name: !Sub ${AWS::StackName}-PublicSubnet
+
+  PrivateSubnet:
+    Description: The ID of the first public subnet
+    Value: !Ref SubnetPrivate
+    Export:
+      Name: !Sub ${AWS::StackName}-PrivateSubnet

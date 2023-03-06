@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: create to RDS
+##########################################
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups: 
+      - Label: 
+          default: 'DB Infomation'
+        Parameters: 
+          - DBName
+          - DBUsername
+          - DBPassword
+          - DBSubnetGroupName
+          - Subnet1Id
+          - Subnet2Id
+#       # - Label: 
+#       #     default: 'Tag Configuration'
+#       #   Parameters:
+#       #     - LogicalNamePrefix
+#       #     - TagKey
+#       #     - TagValue
+
+Parameters:
+  DBName:
+    Type: String
+    Default: 'ctv'
+  DBUsername:
+    Type: String
+    Default: 'administrator'
+  DBPassword:
+    Type: String
+    Default: 'sdkfj$o52143#FSS'
+  DBSubnetGroupName:
+    Description: Subnet group's name
+    Type: String
+    Default: 'ctvgroups'
+  Subnet1Id:
+    Description: First subnet Id
+    Type: String
+    Default: 'subnet-0f1750297d56db0f7'
+  Subnet2Id:
+    Description: Second subnet Id
+    Type: String
+    Default: 'subnet-0fabadc5e6837932c'
+
+#Mappings: 
+
+#Conditions: 
+
+Resources: 
+  # Subnet group
+  DBSubnet:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties: 
+      DBSubnetGroupName: !Ref DBSubnetGroupName
+      DBSubnetGroupDescription: '!Ref DBSubnetGroupDescription'
+      SubnetIds: 
+        - !Ref Subnet1Id
+        - !Ref Subnet2Id
+
+  DBInstance:
+    Type: AWS::RDS::DBInstance
+    DependsOn: DBSubnet
+    Properties:
+      # DBSecurityGroups:
+      # - Ref: MyDbSecurityByEC2SecurityGroup
+      # - Ref: MyDbSecurityByCIDRIPGroup
+      AllocatedStorage: '20'
+      DBInstanceClass: db.t3.xlarge
+      Engine: sqlserver-se
+      MasterUsername: !Ref DBUsername
+      MasterUserPassword: !Ref DBPassword
+      # SQLServerを指定した場合 DBNameはNULLにしないとエラー
+      # DBName: !Ref DBName
+      DBSubnetGroupName: !Ref DBSubnet
+      LicenseModel: 'license-included'
+
+# Outputs:
+#   VpcId:
+#     Description: VPC ID 
+#     Value: !Ref VPC
+#     Export:
+#       Name: !Sub  ${AWS::StackName}-VpcId
+  
+#   PublicSubnet:
+#     Description: The ID of the public subnet
+#     Value: !Ref SubnetPublic
+#     Export:
+#       Name: !Sub ${AWS::StackName}-PublicSubnet
+
+#   PrivateSubnet:
+#     Description: The ID of the first public subnet
+#     Value: !Ref SubnetPrivate
+#     Export:
+#       Name: !Sub ${AWS::StackName}-PrivateSubnet

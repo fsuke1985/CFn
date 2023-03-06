@@ -23,9 +23,9 @@ create-stack: $(TARGET)
 	--stack-name $(CFN_STACKNAME) \
 	--template-body file://Network/az.yaml \
 	--parameters \
-	ParameterKey=SubnetPublicCidrBlock,ParameterValue=11.0.0.128/25 \
-	ParameterKey=SubnetPrivateCidrBlock,ParameterValue=11.0.0.0/25 \
-	ParameterKey=VpcCidr,ParameterValue=11.0.0.0/24 
+	ParameterKey=SubnetPublicCidrBlock,ParameterValue=192.168.61.128/25 \
+	ParameterKey=SubnetPrivateCidrBlock,ParameterValue=192.168.61.0/25 \
+	ParameterKey=VpcCidr,ParameterValue=192.168.61.0/24 
 
 create-change-set: $(TARGET)
 	@aws cloudformation create-change-set \
@@ -33,9 +33,9 @@ create-change-set: $(TARGET)
 	--template-body file://Network/az.yaml \
 	--change-set-name $(CFN_STACKNAME) \
 	--parameters \
-	ParameterKey=SubnetPublicCidrBlock,ParameterValue=11.0.0.128/25 \
-	ParameterKey=SubnetPrivateCidrBlock,ParameterValue=11.0.0.0/25 \
-	ParameterKey=VpcCidr,ParameterValue=11.0.0.0/24 
+	ParameterKey=SubnetPublicCidrBlock,ParameterValue=192.168.61.128/25 \
+	ParameterKey=SubnetPrivateCidrBlock,ParameterValue=192.168.61.0/25 \
+	ParameterKey=VpcCidr,ParameterValue=192.168.61.0/24 
 
 list-stacks:
 	@aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE
