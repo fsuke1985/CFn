@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: create to RDS
+##########################################
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups: 
+      - Label: 
+          default: 'Infomation'
+        Parameters: 
+          - AvailabilityZone
+
+Parameters:
+  AvailabilityZone:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: ap-northeast-1a
+
+  SubnetID:
+    Type: AWS::EC2::Subnet::Id
+
+Resources:
+  ReplicationSubnetGroup:
+    Type: AWS::DMS::ReplicationSubnetGroup
+    Properties:
+      ReplicationSubnetGroupIdentifier: dms-subnet-group
+      ReplicationSubnetGroupDescription: DMS subnet group
+      SubnetIds: 
+        - !Ref SubnetID
+
+  ReplicationInstance:
+    Type: AWS::DMS::ReplicationInstance
+    DependsOn: ReplicationSubnetGroup
+    Properties: 
+      AllocatedStorage: 5
+      AllowMajorVersionUpgrade: false
+      AutoMinorVersionUpgrade: false
+      AvailabilityZone: !Ref AvailabilityZone
+      # EngineVersion: String
+      # KmsKeyId: String
+      MultiAZ: false
+      # PreferredMaintenanceWindow: String
+      PubliclyAccessible: false
+      ReplicationInstanceClass: dms.t2.medium
+      ReplicationInstanceIdentifier: String
+      ReplicationSubnetGroupIdentifier: String
+      ResourceIdentifier: String
+      Tags: 
+        - Tag
+      VpcSecurityGroupIds: 
+        - String
