@@ -8,23 +8,46 @@ Metadata:
           default: 'Infomation'
         Parameters: 
           - AvailabilityZone
+          - SubnetID1
+          - SubnetID2
 
 Parameters:
   AvailabilityZone:
     Type: AWS::EC2::AvailabilityZone::Name
     Default: ap-northeast-1a
 
-  SubnetID:
+  SubnetID1:
+    Type: AWS::EC2::Subnet::Id
+
+  SubnetID2:
     Type: AWS::EC2::Subnet::Id
 
 Resources:
+  DMSVPCRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - dms.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/service-role/AmazonDMSVPCManagementRole
+      Path: "/"
+      RoleName: dms-vpc-role
+
   ReplicationSubnetGroup:
     Type: AWS::DMS::ReplicationSubnetGroup
+    DependsOn: DMSVPCRole
     Properties:
       ReplicationSubnetGroupIdentifier: dms-subnet-group
       ReplicationSubnetGroupDescription: DMS subnet group
       SubnetIds: 
-        - !Ref SubnetID
+        - !Ref SubnetID1
+        - !Ref SubnetID2
 
   ReplicationInstance:
     Type: AWS::DMS::ReplicationInstance
@@ -34,7 +57,7 @@ Resources:
       AllowMajorVersionUpgrade: false
       AutoMinorVersionUpgrade: false
       AvailabilityZone: !Ref AvailabilityZone
-      # EngineVersion: String
+      EngineVersion: 3.4.7
       # KmsKeyId: String
       MultiAZ: false
       # PreferredMaintenanceWindow: String
