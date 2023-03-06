@@ -40,10 +40,10 @@ Resources:
       # PreferredMaintenanceWindow: String
       PubliclyAccessible: false
       ReplicationInstanceClass: dms.t2.medium
-      ReplicationInstanceIdentifier: String
-      ReplicationSubnetGroupIdentifier: String
-      ResourceIdentifier: String
-      Tags: 
-        - Tag
-      VpcSecurityGroupIds: 
-        - String
+      # ReplicationInstanceIdentifier: String
+      ReplicationSubnetGroupIdentifier: !Ref ReplicationSubnetGroup
+      # ResourceIdentifier: String
+      # Tags: 
+      #   - Tag
+      # VpcSecurityGroupIds: 
+      #   - String
