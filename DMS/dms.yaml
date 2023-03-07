@@ -38,6 +38,9 @@ Resources:
       - arn:aws:iam::aws:policy/service-role/AmazonDMSVPCManagementRole
       Path: "/"
       RoleName: dms-vpc-role
+      Tags:
+        - Key: Description
+          Value: !Sub CreatedBy${AWS::StackName}
 
   ReplicationSubnetGroup:
     Type: AWS::DMS::ReplicationSubnetGroup

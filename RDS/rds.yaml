@@ -7,7 +7,6 @@ Metadata:
       - Label: 
           default: 'DB Infomation'
         Parameters: 
-          - DBName
           - DBUsername
           - DBPassword
           - DBSubnetGroupName
@@ -21,9 +20,6 @@ Metadata:
 #       #     - TagValue
 
 Parameters:
-  DBName:
-    Type: String
-    Default: 'ctv'
   DBUsername:
     Type: String
     Default: 'administrator'
