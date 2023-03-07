@@ -3,7 +3,7 @@ SHELL = /bin/sh
 TARGET := $(wildcard Network/*.yaml)
 CFN_STACKNAME=${CFn_STACKNAME}
 CFN_FILE=${CFn_FILE}
-CFN_PARAM=${CFn_PARAM}
+CFN_PARAM_FILE=${CFn_PARAM_FILE}
 
 
 .PHONY: version update list-stacks
@@ -20,7 +20,7 @@ create-stack: $(TARGET)
 	@aws cloudformation create-stack \
 	--stack-name $(CFN_STACKNAME) \
 	--template-body $(CFN_FILE) \
-	--parameters $(CFN_PARAM) \
+	--parameters $(CFN_PARAM_FILE) \
 	--capabilities CAPABILITY_NAMED_IAM
 
 create-change-set: $(TARGET)
@@ -29,7 +29,7 @@ create-change-set: $(TARGET)
 	--stack-name $(CFN_STACKNAME) \
 	--template-body $(CFN_FILE) \
 	--change-set-name $(CFN_STACKNAME) \
-	--parameters file://Parameters/dms_parameter.json \
+	--parameters $(CFN_PARAM_FILE) \
 	--capabilities CAPABILITY_NAMED_IAM
 
 list-stacks:
