@@ -1,0 +1,22 @@
+[
+    {
+      "ParameterKey": "AvailabilityZone",
+      "ParameterValue": "ap-northeast-1a"
+    },
+    {
+      "ParameterKey": "SubnetId1",
+      "ParameterValue": "subnet-0c818f7b73b4e5bf9"
+    },
+    {
+      "ParameterKey": "SubnetId2",
+      "ParameterValue": "subnet-0d46a170e370e5052"
+    },
+    {
+      "ParameterKey": "RDSServerName",
+      "ParameterValue": "stack-rds-dbinstance-vksfag0drgca"
+    },
+    {
+      "ParameterKey": "RDSServerPort",
+      "ParameterValue": "1433"
+    }
+]

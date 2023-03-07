@@ -18,7 +18,8 @@
 			"aws-scripting-guy.cform",
 			"oderwat.indent-rainbow",
 			"SirTori.indenticator",
-			"ms-vscode.makefile-tools"
+			"ms-vscode.makefile-tools",
+			"shd101wyy.markdown-preview-enhanced"
 		]
       }
     },

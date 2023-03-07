@@ -8,19 +8,29 @@ Metadata:
           default: 'Infomation'
         Parameters: 
           - AvailabilityZone
-          - SubnetID1
-          - SubnetID2
+          - SubnetId1
+          - SubnetId2
+          - RDSServerName
+          - RDSServerPort
 
 Parameters:
   AvailabilityZone:
     Type: AWS::EC2::AvailabilityZone::Name
     Default: ap-northeast-1a
 
-  SubnetID1:
+  SubnetId1:
     Type: AWS::EC2::Subnet::Id
 
-  SubnetID2:
+  SubnetId2:
     Type: AWS::EC2::Subnet::Id
+  
+  RDSServerName:
+    Type: String
+    Description: "RDS Servername specifed"
+  
+  RDSServerPort:
+    Type: String
+    Description: "RDS ServerPort specifed"
 
 Resources:
   DMSVPCRole:
@@ -49,8 +59,8 @@ Resources:
       ReplicationSubnetGroupIdentifier: dms-subnet-group
       ReplicationSubnetGroupDescription: DMS subnet group
       SubnetIds: 
-        - !Ref SubnetID1
-        - !Ref SubnetID2
+        - !Ref SubnetId1
+        - !Ref SubnetId2
 
   ReplicationInstance:
     Type: AWS::DMS::ReplicationInstance
@@ -73,3 +83,28 @@ Resources:
       #   - Tag
       # VpcSecurityGroupIds: 
       #   - String
+  SourceSQLServerEndpoint:
+    Type: AWS::DMS::Endpoint
+    Properties:
+      EngineName: sqlserver
+      EndpointIdentifier: SourceRDSSQLServer
+      EndpointType: source
+      Username: !Ref AWS::StackName
+      Password: !Ref AWS::StackName
+      ServerName: !Ref RDSServerName
+      Port: !Ref RDSServerPort
+      DatabaseName: !Sub ${AWS::StackName}-dms
+    
+  # TargetPostgreSQLEndpoint:
+  #   Type: AWS::DMS::Endpoint
+  #   Properties:
+  #     EngineName: sqlserver
+  #     EndpointIdentifier: TargetRDSSQLServer
+  #     EndpointType: target
+  #     Username: root
+  #     Password: Root1234
+  #     ServerName:
+  #       Fn::GetAtt: [ RDSPostgreSQL, Endpoint.Address ]
+  #     Port:
+  #       Fn::GetAtt: [ RDSPostgreSQL, Endpoint.Port ]
+  #     DatabaseName: dms
