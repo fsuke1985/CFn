@@ -8,16 +8,16 @@
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 export AWS_SESSION_TOKEN=
-export AWS_DEFAULT_REGION=
+export AWS_DEFAULT_REGION=ap-northeast-1
 
 # スタックの名前
-export CFn_STACKNAME
+export CFn_STACKNAME=
 
 # テンプレートファイルのパス
 # ex. file://<dir>/<file>.yaml
-export CFn_FILE
+export CFn_FILE=
 
 # パラメータファイルのパス
 # ex. file://<dir>/<file>.yaml
-export CFn_PARAM_FILE
+export CFn_PARAM_FILE=
 ```

@@ -95,16 +95,16 @@ Resources:
       Port: !Ref RDSServerPort
       DatabaseName: !Sub ${AWS::StackName}-dms
     
-  # TargetPostgreSQLEndpoint:
-  #   Type: AWS::DMS::Endpoint
-  #   Properties:
-  #     EngineName: sqlserver
-  #     EndpointIdentifier: TargetRDSSQLServer
-  #     EndpointType: target
-  #     Username: root
-  #     Password: Root1234
-  #     ServerName:
-  #       Fn::GetAtt: [ RDSPostgreSQL, Endpoint.Address ]
-  #     Port:
-  #       Fn::GetAtt: [ RDSPostgreSQL, Endpoint.Port ]
-  #     DatabaseName: dms
+  TargetPostgreSQLEndpoint:
+    Type: AWS::DMS::Endpoint
+    Properties:
+      EngineName: sqlserver
+      EndpointIdentifier: TargetRDSSQLServer
+      EndpointType: target
+      Username: root
+      Password: Root1234
+      ServerName:
+        Fn::GetAtt: [ ReplicationInstance, Endpoint.Address ]
+      Port:
+        Fn::GetAtt: [ ReplicationInstance, Endpoint.Port ]
+      DatabaseName: dms

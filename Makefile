@@ -24,7 +24,6 @@ create-stack: $(TARGET)
 	--capabilities CAPABILITY_NAMED_IAM
 
 create-change-set: $(TARGET)
-	@IFS=''
 	@aws cloudformation create-change-set \
 	--stack-name $(CFN_STACKNAME) \
 	--template-body $(CFN_FILE) \

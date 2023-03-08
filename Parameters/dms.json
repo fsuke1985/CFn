@@ -13,7 +13,7 @@
     },
     {
       "ParameterKey": "RDSServerName",
-      "ParameterValue": "stack-rds-dbinstance-vksfag0drgca"
+      "ParameterValue": "192.168.20.161"
     },
     {
       "ParameterKey": "RDSServerPort",
