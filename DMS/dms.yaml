@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: create to RDS
+Description: create to DMS
 ##########################################
 Metadata:
   AWS::CloudFormation::Interface:
@@ -10,8 +10,10 @@ Metadata:
           - AvailabilityZone
           - SubnetId1
           - SubnetId2
-          - RDSServerName
-          - RDSServerPort
+          - SourceRDSServerName
+          - SourceRDSServerPort
+          - TargetRDSServerName
+          - TargetRDSServerPort
 
 Parameters:
   AvailabilityZone:
@@ -24,11 +26,19 @@ Parameters:
   SubnetId2:
     Type: AWS::EC2::Subnet::Id
   
-  RDSServerName:
+  SourceRDSServerName:
     Type: String
     Description: "RDS Servername specifed"
   
-  RDSServerPort:
+  SourceRDSServerPort:
+    Type: String
+    Description: "RDS ServerPort specifed"
+
+  TargetRDSServerName:
+    Type: String
+    Description: "RDS Servername specifed"
+  
+  TargetRDSServerPort:
     Type: String
     Description: "RDS ServerPort specifed"
 
@@ -91,20 +101,18 @@ Resources:
       EndpointType: source
       Username: !Ref AWS::StackName
       Password: !Ref AWS::StackName
-      ServerName: !Ref RDSServerName
-      Port: !Ref RDSServerPort
+      ServerName: !Ref SourceRDSServerName
+      Port: !Ref SourceRDSServerPort
       DatabaseName: !Sub ${AWS::StackName}-dms
     
-  TargetPostgreSQLEndpoint:
+  TargetSQLServerEndpoin:
     Type: AWS::DMS::Endpoint
     Properties:
       EngineName: sqlserver
       EndpointIdentifier: TargetRDSSQLServer
       EndpointType: target
-      Username: root
-      Password: Root1234
-      ServerName:
-        Fn::GetAtt: [ ReplicationInstance, Endpoint.Address ]
-      Port:
-        Fn::GetAtt: [ ReplicationInstance, Endpoint.Port ]
-      DatabaseName: dms
+      Username: !Ref AWS::StackName
+      Password: !Ref AWS::StackName
+      ServerName: !Ref TargetRDSServerName
+      Port: !Ref TargetRDSServerPort
+      DatabaseName: !Sub ${AWS::StackName}-dms

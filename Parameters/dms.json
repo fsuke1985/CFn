@@ -12,11 +12,19 @@
       "ParameterValue": "subnet-0d46a170e370e5052"
     },
     {
-      "ParameterKey": "RDSServerName",
-      "ParameterValue": "192.168.20.161"
+      "ParameterKey": "SourceRDSServerName",
+      "ParameterValue": "192.168.20.61"
     },
     {
-      "ParameterKey": "RDSServerPort",
+      "ParameterKey": "SourceRDSServerPort",
+      "ParameterValue": "1433"
+    },
+    {
+      "ParameterKey": "TargetRDSServerName",
+      "ParameterValue": "stack-rds-dbinstance-vksfag0drgca"
+    },
+    {
+      "ParameterKey": "TargetRDSServerPort",
       "ParameterValue": "1433"
     }
 ]
