@@ -19,7 +19,9 @@
 			"oderwat.indent-rainbow",
 			"SirTori.indenticator",
 			"ms-vscode.makefile-tools",
-			"shd101wyy.markdown-preview-enhanced"
+			"shd101wyy.markdown-preview-enhanced",
+			"kddejong.vscode-cfn-lint",
+			"eastman.vscode-cfn-nag"
 		]
       }
     },
