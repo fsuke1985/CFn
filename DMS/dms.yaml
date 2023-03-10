@@ -14,6 +14,8 @@ Metadata:
           - SourceRDSServerPort
           - TargetRDSServerName
           - TargetRDSServerPort
+          - TargetRDUsername
+          - TargetRDPassword
 
 Parameters:
   AvailabilityZone:
@@ -39,6 +41,14 @@ Parameters:
     Description: "RDS Servername specifed"
   
   TargetRDSServerPort:
+    Type: String
+    Description: "RDS ServerPort specifed"
+
+  TargetRDUsername:
+    Type: String
+    Description: "RDS ServerPort specifed"
+    
+  TargetRDPassword:
     Type: String
     Description: "RDS ServerPort specifed"
 
@@ -111,8 +121,8 @@ Resources:
       EngineName: sqlserver
       EndpointIdentifier: TargetRDSSQLServer
       EndpointType: target
-      Username: !Ref AWS::StackName
-      Password: !Ref AWS::StackName
+      Username: !Ref TargetRDUsername
+      Password: !Ref TargetRDPassword
       ServerName: !Ref TargetRDSServerName
       Port: !Ref TargetRDSServerPort
       DatabaseName: !Sub ${AWS::StackName}-dms

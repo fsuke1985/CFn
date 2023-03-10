@@ -26,5 +26,13 @@
     {
       "ParameterKey": "TargetRDSServerPort",
       "ParameterValue": "1433"
+    },
+    {
+      "ParameterKey": "TargetRDUsername",
+      "ParameterValue": "administrator"
+    },
+    {
+      "ParameterKey": "TargetRDPassword",
+      "ParameterValue": "sdkfj$o52143#FSS"
     }
 ]
