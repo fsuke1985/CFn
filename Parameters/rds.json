@@ -1,0 +1,22 @@
+[
+    {
+        "ParameterKey": "DBUsername",
+        "ParameterValue": "administrator"
+    },
+    {
+        "ParameterKey": "DBPassword",
+        "ParameterValue": "sdkfj$o52143#FSS"
+    },
+    {
+        "ParameterKey": "DBSubnetGroupName",
+        "ParameterValue": "ctvgroups"
+    },
+    {
+        "ParameterKey": "Subnet1Id",
+        "ParameterValue": "subnet-0c818f7b73b4e5bf9"
+    },
+    {
+        "ParameterKey": "Subnet2Id",
+        "ParameterValue": "subnet-0d46a170e370e5052"
+    }
+]

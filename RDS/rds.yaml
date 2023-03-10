@@ -69,13 +69,18 @@ Resources:
       DBSubnetGroupName: !Ref DBSubnet
       LicenseModel: 'license-included'
 
-# Outputs:
-#   VpcId:
-#     Description: VPC ID 
-#     Value: !Ref VPC
-#     Export:
-#       Name: !Sub  ${AWS::StackName}-VpcId
-  
+Outputs:
+  DBUsername:
+    Description: DBUsername
+    Value: !Ref DBUsername
+    Export:
+      Name: !Sub  ${AWS::StackName}-DBUsername
+
+  DBPassword:
+    Description: DBPassword
+    Value: !Ref DBPassword
+    Export:
+      Name: !Sub  ${AWS::StackName}-DBPassword
 #   PublicSubnet:
 #     Description: The ID of the public subnet
 #     Value: !Ref SubnetPublic
